@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.codepath.apps.restclienttemplate.TimelineActivity;
+
 public class Tweet {
 
     public String body;
@@ -17,7 +19,7 @@ public class Tweet {
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
         tweet.body = jsonObject.getString("text");
-        tweet.createdAt = jsonObject.getString("created_at");
+        tweet.createdAt = TimelineActivity.getRelativeTimeAgo(jsonObject.getString("created_at"));
         tweet.id = jsonObject.getLong("id");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         return tweet;

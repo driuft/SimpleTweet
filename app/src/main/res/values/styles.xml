@@ -6,11 +6,15 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="android:statusBarColor">#1DA1F2</item>
+        <item name="colorPrimary">#1DA1F2</item>
+        <item name="fontFamily">Roboto</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:navigationBarColor">#1DA1F2</item>
     </style>
 
 </resources>

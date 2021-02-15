@@ -1,5 +1,11 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +17,23 @@ import java.util.List;
 import com.codepath.apps.restclienttemplate.TimelineActivity;
 
 @Parcel
+@Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "userId"))
 public class Tweet {
 
-    public String body;
-    public String createdAt;
+    @PrimaryKey
+    @ColumnInfo
     public long id;
+
+    @ColumnInfo
+    public String body;
+
+    @ColumnInfo
+    public String createdAt;
+
+    @ColumnInfo
+    public long userId;
+
+    @Ignore
     public User user;
 
     // empty constructor needed by the Parceler library
@@ -26,7 +44,9 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = TimelineActivity.getRelativeTimeAgo(jsonObject.getString("created_at"));
         tweet.id = jsonObject.getLong("id");
-        tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        User user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.user = user;
+        tweet.userId = user.id;
         return tweet;
     }
 
